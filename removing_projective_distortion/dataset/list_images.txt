@@ -1,0 +1,7 @@
+'casaconOcclusion.jpg',
+'buco.jpg',
+'build0.jpg',
+'campus.jpg',
+'hotel.jpg',
+'hilton.png',
+'palazzo.jpg'
