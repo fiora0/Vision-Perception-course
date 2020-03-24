@@ -8,7 +8,7 @@ The course is divided in three parts:
 1) Multiview Geometry (Hartley & Zissermann), 2) Computer Vision Algorithm (Richard Szeliski) 3) Deep Learning for Computer Vision (Goodfellow & Bengio &Courville: Deep Learning Part III)
 
 The program of the course can be found here:
-![](https://sites.google.com/a/diag.uniroma1.it/visiope/home/program) 
+[GitHub](https://sites.google.com/a/diag.uniroma1.it/visiope/home/program) 
 
 Meeting is every Wednesday on Google Classroom
 Video lectures are on YouTube
