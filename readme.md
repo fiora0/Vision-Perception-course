@@ -38,16 +38,16 @@ In the folder Dataset there are some images of buildings. Run the script transfo
 (there are 7 images in the dataset) an image is loaded, ensure that you have a folder named "dataset".
 
 The image is shown and you should pick four points of a quadrilateral as in this example:
-[choose four points](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/choosefourpoints.png)
+![Choose four points](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/choosefourpoints.png)
 
 
 This  will be then mapped to a rectangle as shown in the following image showing your chosen four points (upsidedown) and the rectangle obtained from them.
 
-[rectangle](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/rectangle.png)
+![Rectangle](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/rectangle.png)
 
 In the end you will se the image with removed projected distortion as this:
 
-[Removed Distortion](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/dist_removed.png)
+![Distortion removed](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/dist_removed.png)
 
 You can add any other image you like to run the script. Be aware that the more distorted is the image the smaller will be the recovered building image and it might even disappear.
 
