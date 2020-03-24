@@ -8,7 +8,7 @@ The course is divided in three parts:
 1) Multiview Geometry (Hartley & Zissermann), 2) Computer Vision Algorithm (Richard Szeliski) 3) Deep Learning for Computer Vision (Goodfellow & Bengio &Courville: Deep Learning Part III)
 
 The program of the course can be found here:
-[GitHub](https://sites.google.com/a/diag.uniroma1.it/visiope/home/program) 
+[Program of Vision & Perception](https://sites.google.com/a/diag.uniroma1.it/visiope/home/program) 
 
 Meeting is every Wednesday on Google Classroom
 Video lectures are on YouTube
@@ -38,16 +38,16 @@ In the folder Dataset there are some images of buildings. Run the script transfo
 (there are 7 images in the dataset) an image is loaded, ensure that you have a folder named "dataset".
 
 The image is shown and you should pick four points of a quadrilateral as in this example:
-![](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/choosefourpoints.png)
+[choose four points](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/choosefourpoints.png)
 
 
-This  will be then mapped to a rectangle as shown in the following image showing your chosen foru points (upsidedown) and the rectangle obtained from them.
+This  will be then mapped to a rectangle as shown in the following image showing your chosen four points (upsidedown) and the rectangle obtained from them.
 
-![](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/rectangle.png)
+[rectangle](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/rectangle.png)
 
 In the end you will se the image with removed projected distortion as this:
 
-![](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/dist_removed.png)
+[Removed Distortion](https://github.com/fiora0/Vision-Perception-course/tree/master/removing_projective_distortion/dist_removed.png)
 
 You can add any other image you like to run the script. Be aware that the more distorted is the image the smaller will be the recovered building image and it might even disappear.
 
