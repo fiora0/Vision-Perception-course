@@ -47,7 +47,7 @@ This  will be then mapped to a rectangle as shown in the following image showing
 
 In the end you will se the image with removed projected distortion as this:
 
-![](https://removing_projective_distortion/dist_removed.png)
+![](removing_projective_distortion/dist_removed.png)
 
 You can add any other image you like to run the script. Be aware that the more distorted is the image the smaller will be the recovered building image and it might even disappear.
 
