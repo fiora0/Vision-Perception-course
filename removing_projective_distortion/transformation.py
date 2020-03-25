@@ -121,9 +121,8 @@ def image_rebound(mm,nn,hh):
     return bounds
 
 
-def make_transform(imm,hh):    
-    imm_gray = rgb2gray(imm)
-    mm,nn = imm_gray.shape
+def make_transform(imm,hh):   
+    mm,nn = imm.shape[0],imm.shape[0]
     bounds = image_rebound(mm,nn,hh)
     nrows = bounds[1] - bounds[0]
     ncols = bounds[3] - bounds[2]
@@ -134,7 +133,7 @@ def make_transform(imm,hh):
     bounds = image_rebound(mm,nn,trasf)
     nrows = (bounds[1] - bounds[0]).astype(np.int)
     ncols = (bounds[3] - bounds[2]).astype(np.int)
-    return bounds, nrows, ncols, trasf, trasf_prec, imm_gray
+    return bounds, nrows, ncols, trasf, trasf_prec
 
 
 def get_new_image(nrows,ncols,imm,bounds,trasf_prec,nsamples):
@@ -207,8 +206,8 @@ if __name__ == "__main__":
         hh =  compute_homography(A,T1_norm,T2_norm)
         
         ### 
-        bounds, nrows, ncols,  trasf, trasf_prec, imm_r = make_transform(im,hh)     
-        nn,mm,_ =im.shape
+        bounds, nrows, ncols,  trasf, trasf_prec = make_transform(im,hh)     
+        nn,mm  = im.shape[0],im.shape[0]
         if max(nn,mm)>1000:
             kk =6
         else: kk =5
