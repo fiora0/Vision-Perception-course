@@ -108,7 +108,7 @@ def projToAffine(imm):
     
     ### warping
     tform = ProjectiveTransform(H)
-    immTr = warp(np.array(imm), tform.inverse, output_shape =(2100, 3600))
+    immTr = warp(np.array(imm), tform.inverse, output_shape = imm.size)
     imm_aff = crop_imm(immTr, imm.size)
     plt.figure(2)
     plt.imshow(imm_aff)
