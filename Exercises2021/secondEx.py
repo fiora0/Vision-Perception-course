@@ -29,8 +29,8 @@ def crop_imm(imms, ss):
     left, top, right, bottom = mu, nu, nn, mm
     immx = Image.fromarray(((imms*255).astype(np.uint8)))
     im_cropped = immx.crop((left, top, right, bottom)) 
-    im_resh = im_cropped.resize((ss[0], ss[1]),  Image.ANTIALIAS)
-    return im_resh
+    # im_resh = im_cropped.resize((ss[0], ss[1]),  Image.ANTIALIAS)
+    return im_cropped
 
 def projToAffine(imm):
     """ Exercise 2 questions 1,2 and 3:
@@ -58,13 +58,12 @@ def projToAffine(imm):
     x_values = [l1p[4][0], l1p[5][0]]
     y_values = [l1p[4][1], l1p[5][1]]
     plt.plot(x_values, y_values,'b', label = "line 3", linewidth=2)
-    
     #### fourth line
     x_values = [l1p[6][0], l1p[7][0]]
     y_values = [l1p[6][1], l1p[7][1]]
     plt.plot(x_values, y_values,'b', label = "line 4", linewidth=2)
     #
-    
+   
     ### pick up and draw the points to define the line at infinity
     
     """ compute the points at infinity """
@@ -108,15 +107,15 @@ def projToAffine(imm):
     
     ### warping
     tform = ProjectiveTransform(H)
-    immTr = warp(np.array(imm), tform.inverse, output_shape = imm.size)
+    immTr = warp(np.array(imm), tform.inverse, output_shape =(imm.size[1], imm.size[0]))
     imm_aff = crop_imm(immTr, imm.size)
     plt.figure(2)
     plt.imshow(imm_aff)
     plt.title('Affine Image')
-    return imm_aff
+    return imm_aff, H
 
 
-def affineToMetric(imm_aff, imm):
+def affineToMetric(aff_imm, imm):
     """ LAST QUESTION of Exercise 2: note that we obtained an affine rectification 
         and not a metric rectification.
         To obtain a metric rectification from the affine one we need to find 2 constraints
@@ -126,7 +125,7 @@ def affineToMetric(imm_aff, imm):
         enough  to compute the dual conic at infinity
     """
     
-    plt.imshow(imm_aff)    
+    plt.imshow(aff_imm)    
     plt.title(
         'Choose 8 points so as to obtain a pair of orthogonal lines: lines of the orthogonal pair should not be parallel')
     l1A = plt.ginput(8, timeout=60, show_clicks=True)
@@ -181,7 +180,7 @@ def affineToMetric(imm_aff, imm):
     constraint2 = (L2[0]*M2[0], L2[0]*M2[1]+L2[1]*M2[0], L2[1]*M2[1])
     
     ### We now obtain s as the null space of vecs
-    C =np.row_stack([constraint1,constraint2])
+    C = np.row_stack([constraint1,constraint2])
     
     s = scipy.linalg.null_space(C)
     s1 = np.insert(s,2,s[1])
@@ -198,31 +197,27 @@ def affineToMetric(imm_aff, imm):
     
     ## To obtain K compute now the cholesky factorization of S
     K = linalg.cholesky(S, lower = False)
-    K = K.T
+    Kx = K.copy()
+    Kx[1,0] = K[0,1]
+    ###############################
     
+    HA = np.row_stack([np.column_stack([Kx,np.zeros(2)]), np.array([0,0,1])])
+
     ### Verify
     np.allclose(K@K.T-S, 0.0, rtol=1e-05, atol=1e-08, equal_nan=False)
-    
-    ## Build the canonical matrix
-    
-    H = np.row_stack([np.column_stack([S,np.zeros(2)]), np.array([0,0,1])])
-    H = H.T
-    tform = ProjectiveTransform(H)
-    immM = warp(np.array(imm), tform,  output_shape =(2100, 3600))
+    tform = AffineTransform(HA.T)
+    immM = warp(np.array(aff_imm), tform,  output_shape = (2*imm.size[0],2*imm.size[1]))
     imm_metric = crop_imm(immM, imm.size)
-    
-    
-    # im_metric = im_metric.transpose(Image.ROTATE_90)
-    imm_metric = imm_metric.resize((2*imm.size[0], 2*imm.size[1]), Image.ANTIALIAS)
-    plt.figure(4)
+    plt.figure(2)
     plt.imshow(imm_metric)
+    
     return imm_metric
 
 
 def main():
     plt.close('all')
     imm = Image.open('piastrelle.png')
-    aff_imm = projToAffine(imm)
+    aff_imm,Hp = projToAffine(imm)
     metr_imm = affineToMetric(aff_imm, imm)
     plt.close('all')
     rcParams['figure.figsize'] = 18,11
