@@ -4,29 +4,34 @@ Created on Sun Jul  4 08:31:04 2021
 @author: Fiora
 """
 
-""" In this script we show the expected solution to exercise 1
+""" In this script we shoow the expected solution to exercise 1
+    We are in projective geometry, so we do algebraic transformations
+    from points to line and to check whether a point is on a line etc.
+    Furthermore the solution of the exercise was already on YouTube 
+    in the lectures of the past year
 """
-
+### 1: Construct three collinear points x1, x2 and x3 and show they are
+### on a line l.
 import numpy as np
 from numpy import matlib
 from scipy.linalg import null_space
 import math
 from matplotlib import pyplot as plt
 
-### 1: Construct three collinear points x1, x2 and x3 and show they are
-### on a line l.
 ## take two random points and normalize them
 x1 = np.random.rand(3)
 x1 = x1/x1[2]
 
 x2 = np.random.rand(3)
 x2 = x2/x2[2]
+
+plt.figure(1)
 plt.scatter(x1[0], x1[1], c='g', label = 'p1')
 plt.scatter(x2[0], x2[1], c='g', label = 'p2')
 
 x_values = [x1[0], x2[0]]
 y_values = [x1[1], x2[1]]
-plt.figure(1)
+
 plt.plot(x_values, y_values,'r', label = "line 1", linewidth=2)
 ### build the line and normalize it
 L0 = np.cross(x1.T,x2.T)
@@ -39,7 +44,7 @@ x3 = x3/x3[2]
 plt.scatter(x3[0], x3[1], c='g', label = 'p3')
 x_values = [x1[0], x3[0]]
 y_values = [x1[1], x3[1]]
-plt.plot(x_values, y_values,'r', label = "line 1", linewidth=2)
+plt.plot(x_values, y_values,'r', label = "line 1-completion", linewidth=2)
 ### verify that the third point is on the line, 
 
 on_the_line = np.abs(np.dot(L0,x3))
@@ -60,7 +65,7 @@ np.allclose(L0_test, L0, rtol=1e-05, atol=1e-08, equal_nan=False)
 ### 2: Show that if H is a projective point trasformation, then the 
 ### transformation applied to the points x1, x2 and x3 and suitably to 
 ### the line l maps the points into points x1', x2', x3' and the line l
-### into the line l' such that x1', x2', x3' are on l'.
+### into the lne l' such that x1', x2', x3' are on l'.
 
 ## Step 1 build H, which is any 3 x 3 non singular matrix
 H = np.random.rand(3,3)
@@ -79,7 +84,6 @@ X1 = X1/np.matlib.repmat(X1[2,:],3,1)
 x1p = X1[:,0]
 x2p = X1[:,1]
 x3p = X1[:,2]
-### Show the points
 plt.scatter(x1p[0], x1p[1], c='b', label = 'p1p')
 plt.scatter(x2p[0], x2p[1], c='b', label = 'p2p')
 plt.scatter(x3p[0], x3p[1], c='b', label = 'p3p')
@@ -87,10 +91,15 @@ plt.scatter(x3p[0], x3p[1], c='b', label = 'p3p')
 L1 = np.cross(x1p.T,x2p.T)
 L1 = L1/L1[2]
 
-### Show the new line
-x_values = [x1p[0], x3p[0]]
-y_values = [x1p[1], x3p[1]]
+### Show
+x_values = [x1p[0], x2p[0]]
+y_values = [x1p[1], x2p[1]]
 plt.plot(x_values, y_values,'g', label = "line 2", linewidth=2)
+x_values = [x2p[0], x3p[0]]
+y_values = [x2p[1], x3p[1]]
+plt.plot(x_values, y_values,'g', label = "line 2-completion", linewidth=2)
+
+
 plt.legend()
 ##test
 L1_test = np.cross(x1p.T,x3p.T)
