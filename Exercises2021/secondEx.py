@@ -64,7 +64,7 @@ def projToAffine(imm):
     y_values = [l1p[6][1], l1p[7][1]]
     plt.plot(x_values, y_values,'b', label = "line 4", linewidth=2)
     #
-    plt.legend()
+    
     ### pick up and draw the points to define the line at infinity
     
     """ compute the points at infinity """
@@ -92,7 +92,7 @@ def projToAffine(imm):
     y_values = [p1_at_inf[1]/p1_at_inf[2], p2_at_inf[1]/p2_at_inf[2]]
     plt.plot(x_values, y_values,'g', label = "line at  inf", linewidth=2) 
     
-    
+    plt.legend()
     "The line at infinity"
     l_at_inf = np.cross(p1_at_inf, p2_at_inf)
     l_at_inf = l_at_inf/l_at_inf[2]
